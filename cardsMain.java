@@ -72,9 +72,7 @@ class cards {
             case 'd' -> "♣";
             default -> "?";
         };
-        System.out.println("card: " + card);
-        System.out.println("suit: " + suit);
-        System.out.println("symbol: " + symbol);
+
         String value = switch (rank) {
             case "1" -> "A";
             case "11" -> "J";
@@ -298,6 +296,7 @@ class game {
                     break;
                 // ============================
                 case 2:
+                    winnerFound = winnerCheck(a, cardsOnTable.getLast());
                     if (winnerFound)
                         break;
                     if (fistPlayerturn) {
@@ -331,6 +330,7 @@ class game {
  * Panel
  */
 class Panel {
+    cards cardsInstance = new cards();
 
     void StartGamePanel() {
         System.out.println("\n===========");
@@ -370,20 +370,24 @@ class Panel {
 
     void printGameStates(String card, String thrownCard) {
         System.out.println("\n===========");
-        System.out.println("Card on table : " + card);
-        System.out.println("Thrown card on table : " + thrownCard);
+        System.out.println("Card on table : " + cardsInstance.getCardEmoji(card));
+        System.out.println("Thrown card on table : " + cardsInstance.getCardEmoji(thrownCard));
 
     }
 
     void printPlayerGameState(String[] cards) {
         System.out.println("\n===========");
-        System.out.println(Arrays.deepToString(cards));
+        for (String card : cards) {
+            System.out.print(" " + cardsInstance.getCardEmoji(card));
+        }
     }
 
     void printPlayerThrowOptMsg(String[] cards) {
         System.out.println("\n===========");
-        System.out.println("Your Cards : " + Arrays.deepToString(cards));
-        System.out.println("Which Card you want to Throw");
+        for (String card : cards) {
+            System.out.print(" " + cardsInstance.getCardEmoji(card));
+        }
+        System.out.println("\nWhich Card you want to Throw");
 
     }
 
